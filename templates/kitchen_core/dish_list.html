@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Dish List <a class="btn btn-primary" href="{% url 'kitchen_core:dish-list' %}"></a></h1>
+
+  {% if dish_list %}
+    <ul>
+      {% for dish_type in dish_type_list %}
+        <li>{{ dish_list }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no such dishes in the kitchen!</p>
+  {% endif %}
+{% endblock %}

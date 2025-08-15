@@ -9,12 +9,7 @@
   <br>
 
   <li class="list-group-item"><a href="{% url 'kitchen_core:index' %}">Home</a></li>
-  <li class="list-group-item"><a href="#">All dish type</a></li>
-  <li class="list-group-item"><a href="#">All dish</a></li>
-  <li class="list-group-item"><a href="#">All cook</a></li>
+  <li class="list-group-item"><a href="{% url 'kitchen_core:dish-type-list' %}">All dish type</a></li>
+  <li class="list-group-item"><a href="{% url 'kitchen_core:dish-list' %}">All dish</a></li>
+  <li class="list-group-item"><a href="{% url 'kitchen_core:cook-list' %}">All cook</a></li>
 </ul>
-
-
-{#{% url 'kitchen_core:dish-type-list' %}#}
-{#{% url 'kitchen_core:dish-list' %}#}
-{#{% url 'kitchen_core:cook-list' %}#}
