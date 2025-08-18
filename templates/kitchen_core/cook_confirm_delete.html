@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Delete dish type?</h1>
+  <p class="text-warning">
+    ⚠️ Are you sure you want to permanently delete this chef and associated dishes?
+  </p>
+  <form action="" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, delete</button>
+    <a href="{% url 'kitchen_core:dish-type-list' %}" class="btn btn-secondary">No, go back</a>
+
+  </form>
+{% endblock %}

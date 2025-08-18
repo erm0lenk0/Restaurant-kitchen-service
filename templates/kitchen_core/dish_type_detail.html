@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    {{ dish_type.name }}
+{#      <a href="{% url 'kitchen_core:dish-type-update' pk=dish_type.pk %}" class="btn btn-danger link-to-page">#}
+{#        update#}
+{#      </a>#}
+{#      <a href="{% url 'kitchen_core:dish-type-delete' pk=dish_type.pk %}" class="btn btn-danger link-to-page">#}
+{#        Delete#}
+{#      </a>#}
+  </h1>
+  {% if dishes %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for dish in dishes %}
+          <tr>
+            <td>{{ dish.name }}</td>
+            <td>{{ dish.price }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No dishes available for this type.</p>
+  {% endif %}
+{% endblock %}

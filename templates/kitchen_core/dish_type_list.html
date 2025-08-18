@@ -1,14 +1,48 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>Dish Type List <a class="btn btn-primary" href="{% url 'kitchen_core:dish-type-list' %}"></a></h1>
+  <h1>
+    Dish Type List
+    <a class="btn btn-primary" href="{% url 'kitchen_core:dish-type-create' %}">
+      Create
+    </a>
+  </h1>
+  <form method="get" action="" class="form-inline">
+    {{ search_form|crispy }}
+    <input class="btn btn-secondary" type="submit" value="🔎">
+  </form>
 
   {% if dish_type_list %}
-    <ul>
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
       {% for dish_type in dish_type_list %}
-        <li>{{ dish_type_list }}</li>
+        <tr>
+          <td>{{ dish_type.id }}</td>
+          <td>
+            <a href="{% url 'kitchen_core:dish-type-detail' pk=dish_type.id %}">
+              {{ dish_type.name }}
+            </a>
+          </td>
+          <td>
+            <a href="{% url 'kitchen_core:dish-type-update' pk=dish_type.id %}">
+              Update
+            </a>
+          </td>
+          <td>
+            <a style="color: red"
+              href="{% url 'kitchen_core:dish-type-delete' pk=dish_type.id %}">
+              Delete
+            </a>
+          </td>
+        </tr>
       {% endfor %}
-    </ul>
+    </table>
   {% else %}
     <p>There are no such dishes in the kitchen!</p>
   {% endif %}

@@ -3,8 +3,8 @@
 
 {% block content %}
   <h1>
-    Car list
-    <a href="{% url 'kitchen_core:cook-list' %}" class="btn btn-primary link-to-page">
+    Cook list
+    <a class="btn btn-primary link-to-page" href="{% url 'kitchen_core:cook-create' %}">
       Create
     </a>
   </h1>
@@ -12,16 +12,43 @@
   {{ search_form|crispy }}
   <input class="btn btn-secondary" type="submit" value="🔎">
   </form>
+
+
   {% if cook_list %}
-    <ul>
-      {% for car in car_list %}
-        <li>
-          <a href="{% url "kitchen_core:cook-list" pk=car.id %} ">{{ car.id }}</a>
-          {{ car.model }} ({{ car.manufacturer.name }})
-        </li>
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Full Name</th>
+        <th>Experience</th>
+        <th>Create</th>
+        <th>Delete</th>
+      </tr>
+      {% for cook in cook_list %}
+        <tr>
+          <td>{{ cook.id }}</td>
+          <td>
+            <a href="{% url 'kitchen_core:cook-detail' pk=cook.id %}">
+              {{ cook.username }}
+            </a>
+          </td>
+          <td>{{ cook.first_name }} {{ cook.last_name }}</td>
+          <td>{{ cook.years_of_experience }}</td>
+          <td>
+            <a href="{% url 'kitchen_core:cook-update' pk=cook.id %}">
+              Update
+            </a>
+          </td>
+          <td>
+            <a href="{% url 'kitchen_core:cook-delete' pk=cook.id %}">
+              Delete
+            </a>
+          </td>
+          <td><a href="{% url 'kitchen_core:cook-detail' pk=cook.id %}"></a></td>
+        </tr>
       {% endfor %}
-    </ul>
+    </table>
   {% else %}
-    <p>There are no cars in taxi</p>
+    <p>According to your criteria, there is no cook.</p>
   {% endif %}
 {% endblock %}

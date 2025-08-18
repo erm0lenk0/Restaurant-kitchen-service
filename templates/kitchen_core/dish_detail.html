@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+  {{ dish.name }}
+    <a href="{% url 'kitchen_core:dish-delete' pk=dish.id %}" class="btn btn-danger link-to-page">
+      Delete
+    </a>
+
+    <a href="{% url 'kitchen_core:dish-type-update' pk=dish.id %}" class="btn btn-danger link-to-page">
+      Update
+    </a>
+  </h1>
+  <p>Dish: {{ dish.name }}
+    <br>
+    {{ dish.description }}
+  </p>
+  <h2>
+
+  </h2>
+{% endblock %}
