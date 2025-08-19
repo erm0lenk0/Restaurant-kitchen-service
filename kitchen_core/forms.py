@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 
 from kitchen_core.models import Cook, DishType
+from django import forms
 
 
 class CookCreationForm(UserCreationForm):
@@ -14,12 +15,38 @@ class CookCreationForm(UserCreationForm):
         )
 
 
-# class DishTypeDetailForm(forms.ModelForm):
-#     dish = forms.ModelMultipleChoiceField(
-#         queryset=get_dish_type_model().objects.all(),
-#         widget=forms.CheckboxSelectMultiple,
-#     )
-#
-#     class Meta:
-#         model = DishType
-#         fields = "__all__"
+
+class DishSearchForm(forms.Form):
+    name = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Search by Name"}),
+    )
+
+
+class DishTypeSearchForm(forms.Form):
+    name = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Search by Name"
+            }
+        )
+    )
+
+class CookSearchForm(forms.Form):
+    cook = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Search by First Name or Last Name"
+            }
+        )
+    )
