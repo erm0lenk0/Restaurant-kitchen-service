@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render
 from django.http import HttpResponse, HttpRequest
@@ -7,7 +9,7 @@ from .forms import CookCreationForm, DishSearchForm, DishTypeSearchForm, CookSea
 
 from .models import Dish, DishType, Cook
 
-
+@login_required
 def index(request: HttpRequest) -> HttpResponse:
     num_dish_types = DishType.objects.count()
     num_dishes = Dish.objects.count()
@@ -25,7 +27,7 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, "kitchen_core/index.html", context=context)
 
 
-class DishTypeListView(generic.ListView):
+class DishTypeListView(LoginRequiredMixin, generic.ListView):
     model = DishType
     context_object_name = "dish_type_list"
     paginate_by = 10
@@ -50,27 +52,27 @@ class DishTypeListView(generic.ListView):
 
 
 
-class DishTypeCreateView(generic.CreateView):
+class DishTypeCreateView(LoginRequiredMixin, generic.CreateView):
     model = DishType
     fields = "__all__"
     success_url = reverse_lazy("kitchen_core:dish-type-list")
     template_name = "kitchen_core/dish_type_form.html"
 
 
-class DishTypeUpdateView(generic.UpdateView):
+class DishTypeUpdateView(LoginRequiredMixin, generic.UpdateView):
      model = DishType
      fields = "__all__"
      template_name = "kitchen_core/dish_type_form.html"
      success_url = reverse_lazy("kitchen_core:dish-type-list")
 
 
-class DishTypeDeleteView(generic.DeleteView):
+class DishTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = DishType
     template_name = "kitchen_core/dish_type_confirm_delete.html"
     success_url = reverse_lazy("kitchen_core:dish-type-list")
 
 
-class DishTypeDetailView(generic.DetailView):
+class DishTypeDetailView(LoginRequiredMixin, generic.DetailView):
     model = DishType
     template_name = "kitchen_core/dish_type_detail.html"
     context_object_name = "dish_type"
@@ -83,7 +85,7 @@ class DishTypeDetailView(generic.DetailView):
         return context
 
 
-class DishListView(generic.ListView):
+class DishListView(LoginRequiredMixin, generic.ListView):
     model = Dish
     context_object_name = "dish_list"
     paginate_by = 5
@@ -104,27 +106,27 @@ class DishListView(generic.ListView):
         return queryset
 
 
-class DishCreateView(generic.CreateView):
+class DishCreateView(LoginRequiredMixin, generic.CreateView):
     model = Dish
     fields = "__all__"
     success_url = reverse_lazy("kitchen_core:dish-list")
 
 
-class DishUpdateView(generic.UpdateView):
+class DishUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Dish
     fields = "__all__"
     success_url = reverse_lazy("kitchen_core:dish-list")
 
 
-class DishDeleteView(generic.DeleteView):
+class DishDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Dish
     success_url = reverse_lazy("kitchen_core:dish-list")
 
 
-class DishDetailView(generic.DetailView):
+class DishDetailView(LoginRequiredMixin, generic.DetailView):
     model = Dish
 
-class CookListView(generic.ListView):
+class CookListView(LoginRequiredMixin, generic.ListView):
     model = Cook
     context_object_name = "cook_list"
     template_name = "kitchen_core/cook_list.html"
@@ -150,22 +152,22 @@ class CookListView(generic.ListView):
             )
         return queryset
 
-class CookCreateView(generic.CreateView):
+class CookCreateView(LoginRequiredMixin, generic.CreateView):
     model = Cook
     form_class = CookCreationForm
     success_url = reverse_lazy("kitchen_core:cook-list")
 
 
-class CookUpdateView(generic.UpdateView):
+class CookUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Cook
     fields = "__all__"
     success_url = reverse_lazy("kitchen_core:cook-list")
 
 
-class CookDeleteView(generic.DeleteView):
+class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Cook
     success_url = reverse_lazy("kitchen_core:cook-list")
 
 
-class CookDetailView(generic.DetailView):
+class CookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Cook

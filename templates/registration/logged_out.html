@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>You have been logged out</h2>
+  <p>Thank you for being with us!</p>
+{#  <form method="post" action="{% url 'logout' %}">#}
+{#    {% csrf_token %}#}
+{#  <a href="{% url 'logout' %}" class="btn btn-primary">Войти снова</a>#}
+  <a href="{% url 'account_logout' %}">Выйти</a>
+  <button type="submit">Login again</button>
+{#  </form>#}
+{% endblock %}
