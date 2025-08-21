@@ -1,21 +1,49 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-  <h1>
-  {{ dish.name }}
-    <a href="{% url 'kitchen_core:dish-delete' pk=dish.id %}" class="btn btn-danger link-to-page">
-      Delete
-    </a>
+<div class="container mt-4">
+  <div class="row mb-3">
+    <div class="col">
+      <h1>{{ dish.name }}</h1>
+    </div>
+  </div>
 
-    <a href="{% url 'kitchen_core:dish-type-update' pk=dish.id %}" class="btn btn-danger link-to-page">
-      Update
-    </a>
-  </h1>
-  <p>Dish: {{ dish.name }}
-    <br>
-    {{ dish.description }}
-  </p>
-  <h2>
+  <div class="row">
+    <div class="col-md-8">
+      <h5 class="mb-3">Описание</h5>
+      <p>{{ dish.description }}</p>
 
-  </h2>
+      <h5 class="mt-4">Тип блюда</h5>
+      <p>{{ dish.dish_type.name }}</p>
+
+      {% if user.is_authenticated %}
+        <form method="post" action="{% url 'kitchen_core:toggle-assign-dish' dish.pk %}">
+          {% csrf_token %}
+          {% if dish in user.dishes.all %}
+            <button type="submit" class="btn btn-danger">Удалить из моих блюд</button>
+          {% else %}
+            <button type="submit" class="btn btn-success">Добавить в мои блюда</button>
+          {% endif %}
+        </form>
+      {% endif %}
+    </div>
+
+    <div class="col-md-4 text-center">
+      {% if dish.image %}
+        <img src="{{ dish.image.url }}" alt="{{ dish.name }}" class="img-fluid rounded shadow">
+      {% else %}
+        <img src="{% static 'images/images.jpg' %}" alt="Нет изображения" class="img-fluid rounded shadow">
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Нижняя часть: кнопки редактирования и удаления -->
+  <div class="row mt-4">
+    <div class="col">
+      <a href="{% url 'kitchen_core:dish-update' pk=dish.pk %}" class="btn btn-warning">Редактировать</a>
+      <a href="{% url 'kitchen_core:dish-delete' pk=dish.pk %}" class="btn btn-outline-danger">Удалить</a>
+    </div>
+  </div>
+</div>
 {% endblock %}

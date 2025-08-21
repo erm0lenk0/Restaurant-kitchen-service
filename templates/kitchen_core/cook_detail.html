@@ -3,10 +3,10 @@
 {% block content %}
   <h1>
     {{ cook.username }}
-      <a href="{% url 'kitchen_core:cook-update' pk=cook.id %}" class="btn btn-danger link-to-page">
+      <a href="{% url 'kitchen_core:cook-update' pk=cook.id %}" class="btn btn-warning link-to-page">
         update
       </a>
-      <a href="{% url 'kitchen_core:cook-delete' pk=cook.id %}" class="btn btn-danger link-to-page">
+      <a href="{% url 'kitchen_core:cook-delete' pk=cook.id %}" class="btn btn-outline-danger link-to-page">
         Delete
       </a>
   </h1>
@@ -19,7 +19,6 @@
         <hr>
         <p><strong>Name:</strong> {{ dish.name }}</p>
         <p><strong>Dish Type:</strong> {{ dish.dish_type.name }}</p>
-
 
     {% empty %}
       <p>No dish!</p>

@@ -46,7 +46,7 @@ class CookSearchForm(forms.Form):
         label="",
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Search by First Name or Last Name"
+                "placeholder": "First Name or Last Name"
             }
         )
     )

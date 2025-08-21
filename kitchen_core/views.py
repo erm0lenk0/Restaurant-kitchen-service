@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from django.shortcuts import render
-from django.http import HttpResponse, HttpRequest
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views import generic
 from .forms import CookCreationForm, DishSearchForm, DishTypeSearchForm, CookSearchForm
@@ -30,7 +30,7 @@ def index(request: HttpRequest) -> HttpResponse:
 class DishTypeListView(LoginRequiredMixin, generic.ListView):
     model = DishType
     context_object_name = "dish_type_list"
-    paginate_by = 10
+    paginate_by = 5
     template_name = "kitchen_core/dish_type_list.html"
 
     def get_context_data(self, **kwargs):
@@ -47,9 +47,6 @@ class DishTypeListView(LoginRequiredMixin, generic.ListView):
         if form.is_valid():
             queryset = queryset.filter(name__icontains=form.cleaned_data['name'])
         return queryset
-
-
-
 
 
 class DishTypeCreateView(LoginRequiredMixin, generic.CreateView):
@@ -126,11 +123,22 @@ class DishDeleteView(LoginRequiredMixin, generic.DeleteView):
 class DishDetailView(LoginRequiredMixin, generic.DetailView):
     model = Dish
 
+@login_required
+def toggle_assign_to_dish(request, pk):
+    cook = get_object_or_404(Cook, id=request.user.id)
+    dish = get_object_or_404(Dish, id=pk)
+    if cook in dish.cooks.all():
+        dish.cooks.remove(cook)
+    else:
+        dish.cooks.add(cook)
+    return HttpResponseRedirect(reverse_lazy("kitchen_core:dish-list"))
+
+
 class CookListView(LoginRequiredMixin, generic.ListView):
     model = Cook
     context_object_name = "cook_list"
     template_name = "kitchen_core/cook_list.html"
-    paginate_by = 10
+    paginate_by = 5
 
 
     def get_context_data(self, **kwargs):
