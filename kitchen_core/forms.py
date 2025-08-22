@@ -50,3 +50,8 @@ class CookSearchForm(forms.Form):
             }
         )
     )
+
+class CookUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Cook
+        fields = ["username", "first_name", "last_name", "years_of_experience", "email"]
