@@ -4,7 +4,8 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views import generic
+from django.utils.decorators import method_decorator
+from django.views import generic, View
 from .forms import CookCreationForm, DishSearchForm, DishTypeSearchForm, CookSearchForm, CookUpdateForm
 
 from .models import Dish, DishType, Cook
@@ -123,15 +124,19 @@ class DishDeleteView(LoginRequiredMixin, generic.DeleteView):
 class DishDetailView(LoginRequiredMixin, generic.DetailView):
     model = Dish
 
-@login_required
-def toggle_assign_to_dish(request, pk):
-    cook = get_object_or_404(Cook, id=request.user.id)
-    dish = get_object_or_404(Dish, id=pk)
-    if cook in dish.cooks.all():
-        dish.cooks.remove(cook)
-    else:
-        dish.cooks.add(cook)
-    return HttpResponseRedirect(reverse_lazy("kitchen_core:dish-list"))
+@method_decorator(login_required, name='dispatch')
+class ToggleAssignToDishView(View):
+    def post(self, request, pk):
+        cook = get_object_or_404(Cook, id=request.user.id)
+        dish = get_object_or_404(Dish, id=pk)
+
+        if cook in dish.cooks.all():
+            dish.cooks.remove(cook)
+        else:
+            dish.cooks.add(cook)
+
+        return HttpResponseRedirect(reverse_lazy("kitchen_core:dish-list"))
+
 
 
 class CookListView(LoginRequiredMixin, generic.ListView):
