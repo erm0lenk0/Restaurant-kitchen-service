@@ -1,0 +1,173 @@
+[
+{
+    "model": "kitchen_core.dishtype",
+    "pk": 1,
+    "fields": {
+        "name": "Pizza"
+    }
+},
+{
+    "model": "kitchen_core.dishtype",
+    "pk": 2,
+    "fields": {
+        "name": "Pasta"
+    }
+},
+{
+    "model": "kitchen_core.dishtype",
+    "pk": 3,
+    "fields": {
+        "name": "Desserts"
+    }
+},
+{
+    "model": "kitchen_core.dishtype",
+    "pk": 4,
+    "fields": {
+        "name": "Cakes"
+    }
+},
+{
+    "model": "kitchen_core.dishtype",
+    "pk": 5,
+    "fields": {
+        "name": "Curries"
+    }
+},
+{
+    "model": "kitchen_core.dishtype",
+    "pk": 6,
+    "fields": {
+        "name": "Biscuits"
+    }
+},
+{
+    "model": "kitchen_core.dishtype",
+    "pk": 7,
+    "fields": {
+        "name": "Braai"
+    }
+},
+{
+    "model": "kitchen_core.cook",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$gq8pCMl4PkdTejYpxO8nbt$XeXvG+6IYdi8rhvyQ1NaPEbvgH3wbhXTx1+q+6rHLLA=",
+        "last_login": "2025-08-27T19:13:33.872Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@admin.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-08-13T10:29:39.917Z",
+        "years_of_experience": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "kitchen_core.cook",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$4peAxLnBQ1Qy9plIjHlaDO$rlGSi+NkP4WA4zcwbMo5Im+mroLYEEvfJCAvoGg9Vsw=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "VMaev",
+        "first_name": "Vanessa",
+        "last_name": "Maev",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-17T10:35:46.280Z",
+        "years_of_experience": 2,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "kitchen_core.cook",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$XKdFBVODt8MZG9fP3YHLUB$rpT5tWeOFO61OKdDacngWwIDtEFI6JHpD3jmaIAPoLs=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "YouseiTei",
+        "first_name": "Yousei",
+        "last_name": "Teikoku",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-08-17T10:43:01.165Z",
+        "years_of_experience": 3,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "kitchen_core.dish",
+    "pk": 1,
+    "fields": {
+        "name": "Napoleon",
+        "description": "Layered cake with custard and hints of honey.",
+        "price": "40.50",
+        "dish_type": 4,
+        "cooks": [
+            3
+        ]
+    }
+},
+{
+    "model": "kitchen_core.dish",
+    "pk": 2,
+    "fields": {
+        "name": "Varenyky",
+        "description": "Dumplings with cherries in butter with sour cream.",
+        "price": "26.00",
+        "dish_type": 3,
+        "cooks": [
+            1
+        ]
+    }
+},
+{
+    "model": "kitchen_core.dish",
+    "pk": 3,
+    "fields": {
+        "name": "Pizza meat explosion",
+        "description": "Four types of meat and two types of cheese.",
+        "price": "50.00",
+        "dish_type": 1,
+        "cooks": [
+            1
+        ]
+    }
+},
+{
+    "model": "kitchen_core.dish",
+    "pk": 5,
+    "fields": {
+        "name": "Eclairs",
+        "description": "Delicate cakes with custard and covered with black chocolate.",
+        "price": "30.00",
+        "dish_type": 3,
+        "cooks": [
+            2
+        ]
+    }
+},
+{
+    "model": "kitchen_core.dish",
+    "pk": 6,
+    "fields": {
+        "name": "Charlotte",
+        "description": "╧шЁюу ё  сыюърьш ш ъюЁшЎхщ.",
+        "price": "45.00",
+        "dish_type": 3,
+        "cooks": [
+            2
+        ]
+    }
+}
+]
