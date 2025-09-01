@@ -39,6 +39,13 @@
                   Введите свои данные для входа
                 {% endif %}
               </p>
+{#            {% if debug %}#}
+{#              <div class="alert alert-info mt-3 test-credentials">#}
+{#                <strong>Тестовий користувач</strong>#}
+{#                login: <code>admin</code><br>#}
+{#                password: <code>tr1ML3zcv</code>#}
+{#              </div>#}
+{#            {% endif %}#}
             </div>
             <div class="card-body">
               <form method="post" action="{% url 'login' %}" role="form">

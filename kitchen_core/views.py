@@ -184,3 +184,4 @@ class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class CookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Cook
+
